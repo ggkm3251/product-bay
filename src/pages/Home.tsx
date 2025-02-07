@@ -7,6 +7,8 @@ import ProductCard from '../components/ProductCard';
 
 const Home: React.FC = () => {
     const [products, setProducts] = useState<any[]>([]);
+    const [filter, setFilter] = useState('all');
+    const [sort, setSort] = useState('asc');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -16,9 +18,34 @@ const Home: React.FC = () => {
         fetchProducts();
       }, []);
 
+    const sortedProducts = products
+      .filter(product => filter === 'all' || product.category === filter)
+      .sort((a, b) => (sort === 'asc' ? a.price - b.price : b.price - a.price));
+
   return (
     <div>
         <PromotionalBanner />
+
+        <div>
+        <div className="flex justify-between mb-4">
+          <div>
+            <select onChange={(e) => setFilter(e.target.value)} className="p-2 border">
+              <option value="all">All Products</option>
+              <option value="electronics">Electronics</option>
+              <option value="jewelery">Jewelry</option>
+              <option value="men's clothing">Men's Clothing</option>
+              <option value="women's clothing">Women's Clothing</option>
+            </select>
+          </div>
+
+          <div>
+            <select onChange={(e) => setSort(e.target.value)} className="p-2 border">
+              <option value="asc">Price: Low to High</option>
+              <option value="desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>  
+        </div>
         <h1 className="text-2xl font-bold text-center my-4">Product List</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.map((product: any) => (
