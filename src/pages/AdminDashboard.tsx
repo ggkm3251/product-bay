@@ -2,6 +2,7 @@ import React from 'react';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, LineElement, PointElement, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import Sidebar from '../components/Sidebar';
+import Card from '../components/Card';
 
 ChartJS.register(BarElement, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement);
 
@@ -59,21 +60,29 @@ const AdminDashboard: React.FC = () => {
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Sales Performance */}
-            <Line data={salesData} />
+            <Card title="Sales Performance">
+              <Line data={salesData} />
+            </Card>
             
             {/* Product Comparison */}
-            <Bar data={productComparisonData} />
+            <Card title="Product Comparison">
+              <Bar data={productComparisonData} />
+            </Card>
             
             {/* Inventory Status - Pie Chart */}
-            <Pie data={inventoryData} />
+            <Card title="Inventory Status (Category Distribution)">
+              <Pie data={inventoryData} />
+            </Card>
             
             {/* Inventory Status - Horizontal Bar Chart */}
+            <Card title="Inventory Levels">
             <Bar
               data={inventoryData}
               options={{
                 indexAxis: 'y',
               }}
             />
+          </Card>
        
         </div>
       </div>
