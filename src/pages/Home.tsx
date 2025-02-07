@@ -26,7 +26,8 @@ const Home: React.FC = () => {
     <div>
         <PromotionalBanner />
 
-        <div>
+        <div className="p-4">
+        {/* Filter and Sort Options */}
         <div className="flex justify-between mb-4">
           <div>
             <select onChange={(e) => setFilter(e.target.value)} className="p-2 border">
@@ -46,7 +47,6 @@ const Home: React.FC = () => {
           </div>
         </div>  
         </div>
-        <h1 className="text-2xl font-bold text-center my-4">Product List</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.map((product: any) => (
             <ProductCard key={product.id} product={product} />
