@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, LineElement, PointElement, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar, Line, Pie } from 'react-chartjs-2';
-
+import Sidebar from '../components/Sidebar';
 
 ChartJS.register(BarElement, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement);
 
@@ -54,7 +54,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="flex">
-     
+      <Sidebar />
       <div className="ml-64 p-8 w-full">
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
