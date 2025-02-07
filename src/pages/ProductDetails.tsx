@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { useCart } from '../components/CartContext';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,7 +9,7 @@ const ProductDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -60,7 +60,7 @@ const ProductDetails: React.FC = () => {
           </div>
           <button
             className="bg-blue-600 text-blue-600 py-2 px-4 rounded mt-4 hover:bg-blue-700 transition"
-            onClick={() => alert('Added to cart!')}
+            onClick={() => addToCart(product)}
           >
             Add to Cart
           </button>
