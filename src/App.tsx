@@ -5,6 +5,7 @@ import Navbar from './components/NavBar';
 import ProductDetails from './pages/ProductDetails';
 import { CartProvider } from './components/CartContext';
 import CartPage from './pages/CartPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />}/>
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </CartProvider>
     </Router>
