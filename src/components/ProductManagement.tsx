@@ -49,9 +49,11 @@ const ProductManagement: React.FC = () => {
 
     if (editingProduct) {
       setProducts(products.map((p) => (p.id === editingProduct.id ? { ...newProduct } : p)));
+      alert(`Product "${newProduct.title}" has been successfully updated.`);
     } else {
       const newId = products.length ? Math.max(...products.map((p) => p.id)) + 1 : 1;
       setProducts([...products, { ...newProduct, id: newId }]);
+      alert(`Product "${newProduct.title}" has been successfully added.`);
     }
 
     setNewProduct({ id: 0, title: '', price: 0, image: '' });
@@ -60,7 +62,11 @@ const ProductManagement: React.FC = () => {
   };
 
   const confirmDeleteProduct = () => {
-    setProducts(products.filter((p) => p.id !== confirmDelete));
+    const productToDelete = products.find((p) => p.id === confirmDelete);
+    if (productToDelete) {
+      setProducts(products.filter((p) => p.id !== confirmDelete));
+      alert(`Product "${productToDelete.title}" has been successfully deleted.`);
+    }
     setConfirmDelete(null);
   };
 
