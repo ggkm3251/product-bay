@@ -39,21 +39,21 @@ const ProductDetails: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto p-10">
+    <div className="max-w-5xl mx-auto p-6">
       <button
-        className="mb-4 bg-gray-300 py-2 px-4 rounded-lg shadow-inner border border-gray-1000"
+        className="mb-6 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg shadow hover:bg-gray-300 transition"
         onClick={() => navigate(-1)}
       >
         Back to Products
       </button>
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2">
           <img src={product.image} alt={product.title} className="w-full h-auto rounded-lg shadow-lg" />
         </div>
         <div className="w-full md:w-1/2">
           <h2 className="text-3xl font-bold mb-4">{product.title}</h2>
-          <p className="text-xl font-semibold text-gray-700 mb-2">${product.price.toFixed(2)}</p>
-          <p className="text-gray-600 mb-4">{product.description}</p>
+          <p className="text-xl font-semibold text-gray-700 mb-4">${product.price.toFixed(2)}</p>
+          <p className="text-gray-600 mb-6">{product.description}</p>
           <div className="flex items-center gap-4">
             <span className="text-yellow-500 text-lg">⭐ {product.rating.rate} / 5</span>
             <span className="text-gray-500">({product.rating.count} reviews)</span>

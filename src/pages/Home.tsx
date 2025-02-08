@@ -26,9 +26,9 @@ const Home: React.FC = () => {
     <div>
         <PromotionalBanner />
 
-        <div className="p-4">
+        <div className="max-w-7xl mx-auto p-6">
         {/* Filter and Sort Options */}
-        <div className="flex justify-between mb-4 rounded-lg shadow-inner border border-gray-200">
+        <div className="flex justify-between mb-4 rounded-lg">
           <div>
             <select onChange={(e) => setFilter(e.target.value)} className="p-2 border">
               <option value="all">All Products</option>

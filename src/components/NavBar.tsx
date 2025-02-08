@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
       }, [cart]);
 
   return (
-    <nav className="bg-blue-200 text-white p-4 flex justify-between items-center rounded-lg shadow-inner border border-gray-200">
+    <nav className="w-full bg-white text-white p-4 flex justify-between items-center shadow mb-8">
       <div className="text-xl font-bold">
         <Link to="/">The Band Store</Link>
       </div>
