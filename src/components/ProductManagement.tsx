@@ -17,26 +17,43 @@ const ProductManagement: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios.get('https://fakestoreapi.com/products');
-      setProducts(response.data);
+      try {
+        const response = await axios.get('https://fakestoreapi.com/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
     };
     fetchProducts();
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewProduct((prev) => ({
+      ...prev,
+      [name]: name === 'price' ? parseFloat(value) : value,
+    }));
+  };
+
+  const openEditModal = (product: Product) => {
+    setEditingProduct(product);
+    setNewProduct(product);
+    setShowModal(true);
   };
 
   const saveProduct = () => {
-    if (editingProduct) {
-      setProducts(
-        products.map((p) => (p.id === editingProduct.id ? { ...editingProduct, ...newProduct } : p))
-      );
-    } else {
-      const newId = products.length + 1;
-      const newProductData = { ...newProduct, id: newId };
-      setProducts([...products, newProductData]);
+    if (!newProduct.title || newProduct.price <= 0) {
+      alert('Please provide valid product details.');
+      return;
     }
+
+    if (editingProduct) {
+      setProducts(products.map((p) => (p.id === editingProduct.id ? { ...newProduct } : p)));
+    } else {
+      const newId = products.length ? Math.max(...products.map((p) => p.id)) + 1 : 1;
+      setProducts([...products, { ...newProduct, id: newId }]);
+    }
+
     setNewProduct({ id: 0, title: '', price: 0, image: '' });
     setEditingProduct(null);
     setShowModal(false);
@@ -67,7 +84,7 @@ const ProductManagement: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product: any) => (
+          {products.map((product) => (
             <tr key={product.id} className="even:bg-gray-50">
               <td className="border p-4">{product.id}</td>
               <td className="border p-4">{product.title}</td>
@@ -75,7 +92,7 @@ const ProductManagement: React.FC = () => {
               <td className="border p-4 flex space-x-2">
                 <button
                   className="bg-yellow-500 text-blue-600 py-1 px-3 rounded hover:bg-yellow-600 transition"
-                  onClick={() => setEditingProduct(product)}
+                  onClick={() => openEditModal(product)}
                 >
                   Edit
                 </button>
@@ -124,13 +141,13 @@ const ProductManagement: React.FC = () => {
             />
             <div className="flex justify-end space-x-4">
               <button
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+                className="bg-gray-500 text-red-600 py-2 px-4 rounded hover:bg-gray-600 transition"
                 onClick={() => setShowModal(false)}
               >
                 Cancel
               </button>
               <button
-                className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+                className="bg-green-600 text-blue-600 py-2 px-4 rounded hover:bg-green-700 transition"
                 onClick={saveProduct}
               >
                 Save
@@ -148,13 +165,13 @@ const ProductManagement: React.FC = () => {
             <p className="mb-6">Are you sure you want to delete this product?</p>
             <div className="flex justify-end space-x-4">
               <button
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+                className="bg-gray-500 text-blue-600 py-2 px-4 rounded hover:bg-gray-600 transition"
                 onClick={() => setConfirmDelete(null)}
               >
                 Cancel
               </button>
               <button
-                className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
+                className="bg-red-600 text-red-600 py-2 px-4 rounded hover:bg-red-700 transition"
                 onClick={confirmDeleteProduct}
               >
                 Delete
