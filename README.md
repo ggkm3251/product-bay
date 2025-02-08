@@ -113,11 +113,15 @@ npm run dev
 The app will be available at http://localhost:5173
 
 ## Admin Authentication
-Email: 
+Route:
+```
+/admin
+```
+Login Email: 
 ```
 admin@example.com
 ```
-Password: 
+Login Password: 
 ```
 password
 ```
