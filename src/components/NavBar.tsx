@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
       <div className="flex space-x-6">
         <Link to="/" className="hover:text-gray-200">Home</Link>
         <Link to="/" className="hover:text-gray-200">Products</Link>
-        <Link to="/about" className="hover:text-gray-200">About</Link>
+        <Link to="/" className="hover:text-gray-200">About</Link>
       </div>
       
       <div className="relative">
