@@ -7,20 +7,43 @@ import { CartProvider } from './components/CartContext';
 import CartPage from './pages/CartPage';
 import AdminDashboard from './pages/AdminDashboard';
 import ProductManagement from './components/ProductManagement';
+import { AuthProvider } from './components/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './components/Login';
 
 const App: React.FC = () => {
   return (
     <Router>
-      <CartProvider>
-      <Navbar />
+      <AuthProvider>
+        <CartProvider>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/products" element={<ProductManagement />} />
-        </Routes>
-      </CartProvider>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/login" element={<Login />} />
+
+            {/* Admin Protected Routes */}
+            <Route
+              path="/admin/*"
+              element={
+                <PrivateRoute>
+                  <AdminDashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/products"
+              element={
+                <PrivateRoute>
+                  <ProductManagement />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 };
