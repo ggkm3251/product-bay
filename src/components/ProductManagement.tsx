@@ -48,7 +48,7 @@ const ProductManagement: React.FC = () => {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-16">
       <h2 className="text-3xl font-bold mb-6">Product Management</h2>
       <button
         className="bg-blue-600 text-blue-600 py-2 px-4 rounded hover:bg-blue-700 transition mb-6"
