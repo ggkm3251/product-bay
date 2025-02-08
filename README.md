@@ -29,6 +29,8 @@ This is a simple **ReactJS** web application built with **TypeScript**. The proj
 - Global State Management: Using React Context API.
 
 ### Screenshot
+![Mobile Screenshot](./screenshots/sc1.png)
+![Desktop Screenshot 1](./screenshots/sc2.png)
 
 ### Links
 - Solution URL: [Github Repository](https://github.com/ggkm3251/investment_project)
